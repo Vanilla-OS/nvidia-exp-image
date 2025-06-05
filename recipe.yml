@@ -26,24 +26,6 @@ stages:
     - echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/ /' > /etc/apt/sources.list.d/nvidia-drivers.list
     - apt-get update
 
-  - name: install-repacked-debs
-    type: shell
-    commands:
-    - VERSION=575.57.08-1
-    - mkdir -p /tmp/nvidia
-    - cd /tmp/nvidia
-    - wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/nvidia-driver-libs_${VERSION}_amd64.deb
-    - dpkg-deb -x nvidia-driver-libs_${VERSION}_amd64.deb nvidia-driver-libs_${VERSION}_amd64
-    - dpkg -e nvidia-driver-libs_${VERSION}_amd64.deb nvidia-driver-libs_${VERSION}_amd64/DEBIAN
-    - rm nvidia-driver-libs_${VERSION}_amd64.deb 
-    - sed -i "s/libnvidia-egl-xlib1 (<= ${VERSION}), libnvidia-egl-xlib1/libnvidia-egl-xlib1 (<= ${VERSION}) | libnvidia-egl-xlib1/g" nvidia-driver-libs_${VERSION}_amd64/DEBIAN/control
-    - sed -i "s/libnvidia-egl-xcb1 (<= ${VERSION}), libnvidia-egl-xcb1/libnvidia-egl-xcb1 (<= ${VERSION}) | libnvidia-egl-xcb1/g" nvidia-driver-libs_${VERSION}_amd64/DEBIAN/control
-    - dpkg-deb -b nvidia-driver-libs_${VERSION}_amd64 nvidia-driver-libs_${VERSION}_amd64.deb
-    - apt update
-    - apt install -y ./nvidia-driver-libs_575.51.03-1_amd64.deb
-    - apt-mark hold nvidia-driver-libs
-    - apt install -f
-
   - name: nvidia-official-driver
     type: shell
     commands:
