@@ -29,7 +29,7 @@ stages:
   - name: install-repacked-debs
     type: shell
     commands:
-    - VERSION=575.51.03-1
+    - VERSION=575.57.08-1
     - mkdir -p /tmp/nvidia
     - cd /tmp/nvidia
     - wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/nvidia-driver-libs_${VERSION}_amd64.deb
