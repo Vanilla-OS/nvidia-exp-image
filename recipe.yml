@@ -2,7 +2,7 @@ name: Vanilla Desktop Nvidia Experimental
 id: nvidia-exp
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/desktop:main
+  base: ghcr.io/vanilla-arm/desktop:test@sha256:3cde6972702de223c21cea0bfab08b95f81c1a2580814a84aa2cb23d0c654235
   singlelayer: false
   labels:
     maintainer: Vanilla OS Contributors
