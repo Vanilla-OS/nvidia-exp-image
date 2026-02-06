@@ -6,20 +6,20 @@ commands:
 modules:
 - name: install-nvidia
   type: apt
-  source:
-    packages:
-    - nvidia-kernel-open
-    - nvidia-driver
-    - nvidia-vaapi-driver
-    - nvidia-settings
-    - nvidia-persistenced
-    - cuda-drivers
-    - libnvidia-cfg1
-    - libnvidia-glcore
-    - libnvidia-glvkspirv
-    - libnvidia-gpucomp
-    - libnvidia-fbc1
-    - nvidia-container-toolkit
+  sources:
+    - packages:
+      - nvidia-kernel-open
+      - nvidia-driver
+      - nvidia-vaapi-driver
+      - nvidia-settings
+      - nvidia-persistenced
+      - cuda-drivers
+      - libnvidia-cfg1
+      - libnvidia-glcore
+      - libnvidia-glvkspirv
+      - libnvidia-gpucomp
+      - libnvidia-fbc1
+      - nvidia-container-toolkit
   modules:
     - name: nvidia-official-repo
       type: shell
