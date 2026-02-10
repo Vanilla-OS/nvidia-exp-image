@@ -63,10 +63,8 @@ stages:
     commands:
     - apt autoremove -y
     - apt clean
-    - apt remove -y zutty gnome-shell-extension-prefs
     - SUDO_FORCE_REMOVE=yes apt purge -y sudo
     - lpkg --lock
-    - rm /etc/apt/sources.list.d/nvidia-drivers.list 
 
   - name: fsguard
     type: fsguard

@@ -1,30 +1,27 @@
 name: nvidia-official-driver
 type: shell
 commands:
-- apt-mark hold nvidia-kernel-open nvidia-driver nvidia-vaapi-driver nvidia-settings nvidia-persistenced nvidia-smi libnvidia-cfg1 libnvidia-glcore libnvidia-glvkspirv libnvidia-gpucomp libnvidia-fbc1 nvidia-container-toolkit
+- apt-mark hold cuda-drivers nvidia-container-toolkit
 
 modules:
 - name: install-nvidia
   type: apt
   sources:
     - packages:
-      - nvidia-kernel-open
-      - nvidia-driver
-      - nvidia-vaapi-driver
-      - nvidia-settings
-      - nvidia-persistenced
       - cuda-drivers
-      - libnvidia-cfg1
-      - libnvidia-glcore
-      - libnvidia-glvkspirv
-      - libnvidia-gpucomp
-      - libnvidia-fbc1
       - nvidia-container-toolkit
   modules:
     - name: nvidia-official-repo
       type: shell
+      sources:
+        - type: file
+          url: https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb
+          checksum: e7f219eab6fe4819cdb5c15b98233dc3420302d9c00883219cd3d896857cf48d
+          only-arches: [amd64]
+        - type: file
+          url: https://developer.download.nvidia.com/compute/cuda/repos/debian12/sbsa/cuda-keyring_1.1-1_all.deb
+          checksum: bf2f53b1a19259501119f732bdef2699f8c80c69a18e6a78dad78d67d96766dc
+          only-arches: [arm64]
       commands:
-      - curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/3bf863cc.pub | gpg --dearmor -o /usr/share/keyrings/nvidia-drivers.gpg
-      - echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/ /' > /etc/apt/sources.list.d/nvidia-drivers.list
-      - apt-get update
-
+        - dpkg -i /sources/nvidia-official-repo/cuda-keyring_1.1-1_all/nvidia-official-repo.deb
+        - apt-get update
