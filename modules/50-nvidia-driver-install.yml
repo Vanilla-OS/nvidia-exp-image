@@ -10,6 +10,8 @@ modules:
     - packages:
       - cuda-drivers
       - nvidia-container-toolkit
+  cleanup:
+    - /var/lib/dkms/mok.key
   modules:
     - name: nvidia-official-repo
       type: shell
