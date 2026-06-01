@@ -34,7 +34,6 @@ stages:
     type: includes
     includes:
       - modules/50-nvidia-driver-install.yml
-      - modules/51-nvidia-systemd-units.yml
 
   - name: extra-utilities
     type: apt

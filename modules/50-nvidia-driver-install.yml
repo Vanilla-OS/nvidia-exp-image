@@ -1,14 +1,14 @@
 name: nvidia-official-driver
 type: shell
 commands:
-- apt-mark hold cuda-drivers nvidia-container-toolkit
+- apt-mark hold nvidia-open nvidia-container-toolkit
 
 modules:
 - name: install-nvidia
   type: apt
   sources:
     - packages:
-      - cuda-drivers
+      - nvidia-open
       - nvidia-container-toolkit
   cleanup:
     - /var/lib/dkms/mok.key
@@ -17,14 +17,13 @@ modules:
       type: shell
       sources:
         - type: file
-          url: https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb
-          checksum: e7f219eab6fe4819cdb5c15b98233dc3420302d9c00883219cd3d896857cf48d
+          url: https://developer.download.nvidia.com/compute/cuda/repos/debian13/x86_64/cuda-keyring_1.1-1_all.deb
+          checksum: d0d4ef986a44400f9db33c600ef33a985175e7cc63d805a10e1839c7a1e78f5f
           only-arches: [amd64]
         - type: file
-          url: https://developer.download.nvidia.com/compute/cuda/repos/debian12/sbsa/cuda-keyring_1.1-1_all.deb
-          checksum: bf2f53b1a19259501119f732bdef2699f8c80c69a18e6a78dad78d67d96766dc
+          url: https://developer.download.nvidia.com/compute/cuda/repos/debian13/sbsa/cuda-keyring_1.1-1_all.deb
+          checksum: 022a3ec17a9f77a06882614c64b724384d5942644d30355404f74600766e8311
           only-arches: [arm64]
       commands:
         - dpkg -i /sources/nvidia-official-repo/cuda-keyring_1.1-1_all/nvidia-official-repo.deb
-        - sed -i 's/sha1.second_preimage_resistance.*/sha1.second_preimage_resistance = 2026-12-31/' /usr/share/apt/default-sequoia.config
         - apt-get update
