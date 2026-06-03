@@ -5,8 +5,8 @@
     "registry": "ghcr.io",
     "registryService": "registry.ghcr.io",
     "registryAPIVersion": "v2",
-    "name": "vanilla-os/nvidia-exp",
-    "tag": "main",
+    "name": "vanilla-os/gnome-nvidia-modern",
+    "tag": "latest",
 
     "iPkgMngPre": "lpkg --unlock",
     "iPkgMngPost": "lpkg --lock",
